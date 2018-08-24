@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     getNextSortOrder () {
-      return this.order === 'desc' ? 'asc' : 'desc';
+      return this.order === 'asc' ? 'desc' : 'asc';
     },
     handleClick () {
       const { query } = this
