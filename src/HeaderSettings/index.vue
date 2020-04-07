@@ -1,6 +1,6 @@
 <template>
-  <div class="btn-group" name="HeaderSettings">
-    <button class="btn btn-default dropdown-toggle" ref="dropdownBtn" type="button">
+  <div class="btn-group dropdown" name="HeaderSettings">
+    <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" ref="dropdownBtn" type="button">
       <i class="fa" :class="[usingBak && 'text-info', processingCls || 'fa-cog']"></i>
       <span class="caret"></span>
     </button>
@@ -17,7 +17,7 @@
             {{ $i18nForDatatable('Apply') }}
           </button>
           <template v-if="supportBackup">
-            <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button" style="box-shadow: none">
+            <button data-toggle="dropdown" :class="'btn btn-default dropdown-toggle'+' '+toggleClass" type="button" style="box-shadow: none">
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
@@ -63,7 +63,8 @@ export default {
       origSettings,
       usingBak: false, // is using backup
       processingCls: '',
-      storageKey: this.supportBackup && keyGen(origSettings)
+      storageKey: this.supportBackup && keyGen(origSettings),
+      toggleClass: ''
     }
   },
   created () {
@@ -80,6 +81,7 @@ export default {
     const $el = $(this.$el)
     $(this.$refs.dropdownBtn).on('click', this.toggle)
     $(document).on('click', e => {
+      $(e.target).closest($el).length || $el.removeClass('show') // Bootstrap 4
       $(e.target).closest($el).length || $el.removeClass('open')
     })
   },
@@ -118,7 +120,7 @@ export default {
       replaceWith(this.columns, parseStr(this.origSettings)) // restore
     },
     toggle () {
-      $(this.$el).toggleClass('open')
+      this.toggleClass = this.toggleClass === '' ? 'show open' : ''
     },
     showProcessing () {
       ['fa-spinner fa-pulse', 'fa-check', ''].forEach((cls, idx) => {
