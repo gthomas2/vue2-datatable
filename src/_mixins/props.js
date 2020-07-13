@@ -4,6 +4,7 @@ export default {
     data: { type: Array, required: true }, // rows
     total: { type: Number, required: true },
     query: { type: Object, required: true },
+    loading: Boolean,
     selection: Array, // container for multi-select
     summary: Object, // an extra summary row
     xprops: Object, // extra custom props carrier passed to dynamic components

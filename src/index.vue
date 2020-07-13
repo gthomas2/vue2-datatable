@@ -1,11 +1,13 @@
 <template>
-  <div name="Datatable">
+  <div name="Datatable" :aria-busy="loading">
     <div v-if="$slots.default || HeaderSettings" class="clearfix" style="margin-bottom: 10px">
       <header-settings v-if="HeaderSettings" class="pull-right"
         :columns="columns" :support-backup="supportBackup">
       </header-settings>
       <slot />
     </div>
+
+    <div v-if="loading" class="datatable-spinner" :aria-label="$i18nForDatatable('Loading')"></div>
 
     <tbl v-bind="$props" />
     
@@ -100,7 +102,42 @@ export default {
   }
 }
 </script>
+
 <style>
+
+div[name="Datatable"][loading="true"] table {
+  opacity: 0.25;
+}
+
+div[name="Datatable"] .datatable-spinner {
+  display: none;
+}
+
+div[name="Datatable"][loading="true"] .datatable-spinner {
+  display: block;
+}
+
+@keyframes datatable-spinner {
+  to {transform: rotate(360deg);}
+}
+
+/* https://stephanwagner.me/only-css-loading-spinner */ 
+.datatable-spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  margin-top: -15px;
+  margin-left: -15px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  border-top-color: #07d;
+  animation: datatable-spinner .6s linear infinite;
+}
+
 /* transition effect: fade */
 .fade-enter-active, .fade-leave-active {
   transition: opacity .2s;
