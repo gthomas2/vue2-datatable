@@ -1,5 +1,5 @@
 <template>
-  <div name="Datatable" :aria-busy="loading">
+  <div class="oneway-vue2-datatable" name="Datatable" :aria-busy="loading">
     <div v-if="$slots.default || HeaderSettings" class="clearfix" style="margin-bottom: 10px">
       <header-settings v-if="HeaderSettings" class="pull-right"
         :columns="columns" :support-backup="supportBackup">
@@ -105,15 +105,15 @@ export default {
 
 <style>
 
-div[name="Datatable"][loading="true"] table {
+div.oneway-vue2-datatable[loading="true"] table {
   opacity: 0.25;
 }
 
-div[name="Datatable"] .datatable-spinner {
+div.oneway-vue2-datatable .datatable-spinner {
   display: none;
 }
 
-div[name="Datatable"][loading="true"] .datatable-spinner {
+div.oneway-vue2-datatable[loading="true"] .datatable-spinner {
   display: block;
 }
 
