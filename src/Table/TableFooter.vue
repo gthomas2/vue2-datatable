@@ -10,6 +10,7 @@
             v-if="col.tdComp"
             :is="forDynCompIs(col.tdComp)"
             :row="summary"
+            :col="col"
             :field="col.field"
             :value="summary[col.field]"
             v-bind="$props">

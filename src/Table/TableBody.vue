@@ -12,6 +12,7 @@
               v-if="col.tdComp"
               :is="forDynCompIs(col.tdComp)"
               :row="item"
+              :col="col"
               :field="col.field"
               :value="item[col.field]"
               :options="col.options ? col.options : null"
