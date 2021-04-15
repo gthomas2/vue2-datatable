@@ -12,6 +12,7 @@
           v-if="col.thComp"
           :is="forDynCompIs(col.thComp)"
           :column="col"
+          :columns="columns"
           :field="col.field"
           :title="col.title"
           :query="query"
