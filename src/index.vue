@@ -1,7 +1,7 @@
 <template>
   <div class="oneway-vue2-datatable" name="Datatable" :aria-busy="loading">
-    <div v-if="$slots.default || HeaderSettings" class="clearfix" style="margin-bottom: 10px">
-      <header-settings v-if="HeaderSettings" class="pull-right"
+    <div v-if="$slots.default || showHeaderSettings" class="clearfix" style="margin-bottom: 10px">
+      <header-settings v-if="showHeaderSettings" class="pull-right"
         :columns="columns" :support-backup="supportBackup">
       </header-settings>
       <slot />
@@ -11,7 +11,7 @@
 
     <tbl v-bind="$props" />
     
-    <div v-if="Pagination" class="row" style="margin-top: 10px">
+    <div v-if="showPagination" class="row" style="margin-top: 10px">
       <div class="col-sm-6">
         <strong>
           {{ $i18nForDatatable('Total') }} {{ total }} {{ $i18nForDatatable(',') }}
