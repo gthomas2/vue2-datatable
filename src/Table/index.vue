@@ -8,14 +8,14 @@
           x !== 'Header' && { marginTop: `-${scrollWidth}px` },
           x === 'Body' && { maxHeight: `${fixHeaderAndSetBodyMaxHeight}px` }
         ]">
-        <div :name="`NormalTable${x}`">
+        <div :name="`NormalTable${x}`" :class="tableContainerClass ? tableContainerClass : ''">
           <table-frame v-bind="propsToNormalTable">
             <component :is="`Table${x}`" v-bind="propsToNormalTable" />
           </table-frame>
         </div>
         <div v-if="leftFixedColumns.length"
           :name="`LeftFixedTable${x}`"
-          class="-left-fixed -fixed-table"
+          :class="'-left-fixed -fixed-table' + (tableContainerClass ? tableContainerClass : '')"
           :style="{ left: `${offsetLeft}px` }">
           <table-frame v-bind="propsToLeftFixedTable" left-fixed>
             <component :is="`Table${x}`" v-bind="propsToLeftFixedTable" left-fixed />
@@ -23,7 +23,7 @@
         </div>
         <div v-if="rightFixedColumns.length"
           :name="`RightFixedTable${x}`"
-          class="-right-fixed -fixed-table"
+          :class="'-right-fixed -fixed-table' + (tableContainerClass ? tableContainerClass : '')"
           :style="{ right: `-${offsetLeft}px` }">
           <table-frame v-bind="propsToRightFixedTable" right-fixed>
             <component :is="`Table${x}`" v-bind="propsToRightFixedTable" right-fixed />
@@ -33,7 +33,7 @@
     </template>
   </div>
   <!-- simple mode -->
-  <div v-else name="SimpleTable">
+  <div v-else name="SimpleTable" :class="tableContainerClass ? tableContainerClass : ''">
     <table-frame v-bind="propsToNormalTable">
       <table-header v-bind="propsToNormalTable" />
       <table-body v-bind="propsToNormalTable" />
